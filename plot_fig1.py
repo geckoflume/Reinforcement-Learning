@@ -1,11 +1,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# Plot Figure 1 from a binary file in NumPy .npy format (fig1.npy) without re-computing everything
+
 alphas = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
 epsilons = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
 
 if __name__ == '__main__':
-    correct_responses = np.load('data.npy')
+    correct_responses = np.load('fig1.npy')
     fig, ax = plt.subplots()
 
     for alpha_run in range(len(alphas)):                # for each alpha

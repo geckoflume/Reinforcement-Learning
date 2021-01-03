@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 # spatial alternation task
 
@@ -12,23 +11,12 @@ import matplotlib.pyplot as plt
 # start state : 0
 # reward states : 4, 9
 
-# parameter values for the algorithm
-#alpha = 0.01
-alphas = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
-discount = 0.95
-#epsilon = 0.01
-epsilons = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
-decay_rate = 0.25
-theta = 0.01
-
-
 # action dictionary
 UP = 0
 DOWN = 1
 RIGHT = 2
 LEFT = 3
 UPDATE = 4
-
 
 # epsilon greedy policy for the actor
 def policy(Q_values, epsilon, nA):
@@ -62,7 +50,7 @@ def take_action(loc_state, action):
     return next_loc_state, reward
 
 
-if __name__ == '__main__':
+def compute(alphas, discount, epsilons, decay_rate, theta):
     n_states = 13
     n_actions = 5
     actions_dict = {UP: 'up', DOWN: 'down', RIGHT: 'right', LEFT: 'left', UPDATE: 'update'}
@@ -279,40 +267,4 @@ if __name__ == '__main__':
                             episode_lengths1[i_run][i_episode] = n_steps/tr
                             print("trials = ", tr, " correct responses = ", ncr)
     '''
-
-    '''
-    plt.plot(np.average(episode_rewards, axis=0))
-    plt.title('Continuous spatial alternation, 10 runs')
-    plt.ylabel('Average reward')
-    plt.xlabel('Step block')
-    plt.show()
-
-    plt.plot(np.average(episode_lengths, axis=0))
-    plt.title('Continuous spatial alternation, 10 runs')
-    plt.ylabel('Number of steps for each trial')
-    plt.xlabel('Step block')
-    plt.show()
-    '''
-
-    #fig, ax = plt.plot(np.average(correct_responses, axis=0))
-    fig, ax = plt.subplots()
-    #X = np.arange(num_episodes)
-    #M =  np.mean(correct_responses, axis=0)
-    #V = np.var(correct_responses, axis=0)
-    #ax.plot(X, M)
-    #ax.fill_between(X, M+V, M-V, alpha=0.1)
-
-    '''
-    for i in range(num_runs):
-        ax.plot(correct_responses[i][:], alpha=0.1)
-    '''
-    np.save('data.npy', correct_responses)
-    for alpha_run in range(len(alphas)):                # for each alpha
-        for epsilon_run in range(len(epsilons)):        # for each epsilon
-            ax.plot(np.average(correct_responses[alpha_run][epsilon_run], axis=0), label="with memory α=" + str(alphas[alpha_run]) + ", ε=" + str(epsilons[epsilon_run]))      # with memory
-            # ax.plot(np.average(correct_responses1[alpha_run][epsilon_run], axis=0), label="without memory α=" + str(alphas[alpha_run]) + ", ε=" + str(epsilons[epsilon_run]))  # without memory
-    ax.set_title('Continuous spatial alternation')
-    ax.set_ylabel('Performance')
-    ax.set_xlabel('Step block')
-    plt.legend(loc="upper right")
-    plt.show()
+    return correct_responses #, correct_responses1
