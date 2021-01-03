@@ -14,10 +14,10 @@ import matplotlib.pyplot as plt
 
 # parameter values for the algorithm
 #alpha = 0.01
-alphas = [0.2, 0.4, 0.6, 0.8, 1.0]
+alphas = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
 discount = 0.95
 #epsilon = 0.01
-epsilons = [0.2, 0.4, 0.6, 0.8, 1.0]
+epsilons = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
 decay_rate = 0.25
 theta = 0.01
 
@@ -306,6 +306,7 @@ if __name__ == '__main__':
     for i in range(num_runs):
         ax.plot(correct_responses[i][:], alpha=0.1)
     '''
+    np.save('data.npy', correct_responses)
     for alpha_run in range(len(alphas)):                # for each alpha
         for epsilon_run in range(len(epsilons)):        # for each epsilon
             ax.plot(np.average(correct_responses[alpha_run][epsilon_run], axis=0), label="with memory α=" + str(alphas[alpha_run]) + ", ε=" + str(epsilons[epsilon_run]))      # with memory
